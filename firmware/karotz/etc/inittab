@@ -1,0 +1,14 @@
+# Startup the system
+::once:/karotz/scripts/karotz_init.sh
+::respawn:/karotz/bin/power
+
+# Configuration programm
+::once:/usr/scripts/miniusb_read.sh
+
+::restart:/sbin/init
+
+#::askfirst:/bin/bash
+
+# Stuff to do before rebooting
+::shutdown:/karotz/scripts/karotz_shutdown.sh
+::shutdown:/bin/umount -a -r

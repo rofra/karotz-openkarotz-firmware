@@ -1,0 +1,37 @@
+# service-name  port/protocol  [aliases ...]   [# comment]
+
+tcpmux		1/tcp
+echo		7/tcp
+echo		7/udp
+systat		11/tcp		users
+daytime		13/tcp
+daytime		13/udp
+netstat		15/tcp
+ftp-data	20/tcp
+ftp		21/tcp
+ssh		22/tcp
+ssh		22/udp
+telnet		23/tcp
+smtp		25/tcp		mail
+time		37/tcp		timserver
+time		37/udp		timserver
+nameserver	42/tcp		name
+whois		43/tcp		nicname
+bootps		67/tcp
+bootps		67/udp
+bootpc		68/tcp
+bootpc		68/udp
+tftp		69/udp
+finger		79/tcp
+www		80/tcp		http
+www		80/udp
+pop3		110/tcp		pop-3
+pop3		110/udp		pop-3
+sunrpc		111/tcp		portmapper
+sunrpc		111/udp		portmapper
+auth		113/tcp		authentication tap ident
+nntp		119/tcp		readnews untp
+ntp		123/tcp
+ntp		123/udp
+snmp		161/udp
+snmp-trap	162/udp		snmptrap

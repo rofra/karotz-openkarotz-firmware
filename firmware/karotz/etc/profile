@@ -1,0 +1,7 @@
+#!/bin/bash
+DISPLAY=unix:0.0
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:./
+LD_LIBRARY_PATH=/lib:/usr/lib
+LANG=C
+KMOD=/lib/modules/
+export PATH LD_LIBRARY_PATH LANG DISPLAY KMOD

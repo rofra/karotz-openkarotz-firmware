@@ -1,0 +1,4 @@
+none            /proc           proc    defaults        0 0
+none            /dev/pts        devpts  mode=0622       0 0
+tmpfs           /dev/shm        tmpfs   defaults        0 0
+usbfs           /proc/bus/usb   usbfs   defaults        0 0
