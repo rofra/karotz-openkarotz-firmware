@@ -1,5 +1,8 @@
 #!/bin/bash
 
+logger-s "[OpenKarotz] yaffs update disabled"
+exit 0 
+
 . /karotz/scripts/update_functions.sh
 . /karotz/scripts/led_functions.sh
 

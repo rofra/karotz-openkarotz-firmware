@@ -7,7 +7,11 @@
 
 ::restart:/sbin/init
 
-#::askfirst:/bin/bash
+::askfirst:/bin/bash
+
+# ::once:/usr/etc/init.d/telnet start
+::respawn:/sbin/inetd -f /karotz/etc/inetd.conf
+# ::respawn:/sbin/getty -L ttyS0 115200 vt100
 
 # Stuff to do before rebooting
 ::shutdown:/karotz/scripts/karotz_shutdown.sh

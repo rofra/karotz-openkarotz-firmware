@@ -1,0 +1,88 @@
+#!/bin/bash
+
+. /karotz/scripts/update_functions.sh
+. /karotz/scripts/led_functions.sh
+. /usr/scripts/yaffs_start_functions.sh
+
+#----------------------------------------------------------------------------
+# START_KAROTZ_SYSTEM
+# ---------------------------------------------------------------------------
+# Starts our 'applicative' bricks
+#   return : nothing
+# ---------------------------------------------------------------------------
+function start_karotz_bricks {
+    logger -s "[START] Karotz system starting"
+
+    # Starting bricks
+    /usr/karotz/bin/immortaldog /var/run/karotz/ears.pid /usr/karotz/bin/ears-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/multimedia.pid /usr/karotz/bin/multimedia-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/voice.pid /usr/karotz/bin/voice-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/webcam.pid /usr/karotz/bin/webcam-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/rfid.pid /usr/karotz/bin/rfid-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/k2k.pid /usr/karotz/bin/k2k-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/led.pid /usr/karotz/bin/led-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/button.pid /usr/karotz/bin/button-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/scheduler.pid /usr/karotz/bin/scheduler-daemon
+    /usr/karotz/bin/immortaldog /var/run/karotz/serial.pid /usr/karotz/bin/serial-daemon
+
+    # Starting other bin
+    # TODO : to add second parameter
+    # /usr/karotz/bin/immortaldog /var/run/karotz/mpd.pid /usr/bin/mpd /etc/mpd/mpd.conf
+    # /usr/bin/mpd /etc/mpd/mpd.conf
+}
+
+
+function led_internet_ok {
+    led_fixe $VIOLET
+}
+
+function led_check_update_ok {
+    led_fixe $GREEN
+}
+
+
+# ---------------------------------------------------------------------------
+# KILLALL_KAROTZ_SYSTEM
+# ---------------------------------------------------------------------------
+# Something failed. Let's kill the remaining parts of the system, if any.
+#   return : nothing
+# ---------------------------------------------------------------------------
+function killall_karotz_system {
+    logger -s "[START] killall karotz system."
+    /bin/killall immortaldog > /dev/null
+}
+
+logger -s "[START] starting yaffs."
+
+led_no_conf
+
+if [ -f /etc/conf/playsounds ] ; then
+        madplay /usr/karotz/res/sounds/Karotz_lumiere_bleuCiel.mp3 &
+        logger -s "[START] playsounds TRUE"
+    else
+        logger -s "[START] playsounds FALSE"
+fi
+    
+/usr/bin/python /usr/scripts/wait_until_connected.py
+
+if [ $? -eq 0 ]; then
+    start_dbus
+    #dbus_led_internet
+    led_internet_ok
+    [ "$AUTO_UPDATE" = "yes" ] && check_updates
+    led_check_update_ok
+    /bin/killall led > /dev/null
+    
+    start_karotz_bricks
+    /usr/karotz/bin/immortaldog /var/run/karotz/controller.pid /usr/karotz/bin/controller
+    killall madplay
+    if [ -f /etc/conf/playsounds ] ; then
+        madplay /usr/karotz/res/sounds/karotz_allume.mp3 
+        logger -s "[START] playsounds TRUE"
+    else
+        logger -s "[START] playsounds FALSE"
+    fi
+else
+    logger -s "[START] karotz not connected"
+fi
+

@@ -79,15 +79,10 @@ rm -rf /etc/conf/rootfs_version
 
 /bin/ln -s /karotz/etc/rootfs_version /etc/conf/rootfs_version 
 
-[ -e /etc/resolv.conf ] && /bin/rm /etc/resolv.conf
-cat << EOF > /etc/resolv.conf
-nameserver 8.8.8.8
-EOF
-
 [ -f "/dev/rtc" ] && /bin/rm /dev/rtc
 /bin/ln -s /dev/rtc0 /dev/rtc
 
-/bin/hostname karotz
+/bin/hostname openkarotz
 
 [ ! -e /etc/ld.so.cache ] && /sbin/ldconfig
 
@@ -99,9 +94,9 @@ export GST_REGISTRY=/usr/karotz/registry
 export GST_REGISTRY_UPDATE=no
 export AUTO_UPDATE=yes
 
-[ -f /etc/conf/enable_syslogd ] && /sbin/syslogd
+[ -f /etc/conf/enable_syslogd ] && /sbin/syslogd -s 50 -b 2
 
-/sbin/inetd
+#/sbin/inetd
 
 /bin/cat /karotz/etc/motd
 

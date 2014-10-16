@@ -10,6 +10,7 @@ mail:*:8:
 news:*:9:
 uucp:*:10:
 kmem:*:15:
+www:x:51:
 dbus:x:81:
 ppp:x:99:
 nogroup:x:100:
