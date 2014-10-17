@@ -20,6 +20,7 @@ cp -fR firmware/ firmware.new/
 chown -R root.root firmware.new/
 mkcramfs firmware.new/ rootfs.img 
 gzip -c rootfs.img > rootfs.img.gz
+rm -f rootfs.img
 md5sum rootfs.img.gz > rootfs.img.gz.md5
 rm -fr firmware.new/
 
