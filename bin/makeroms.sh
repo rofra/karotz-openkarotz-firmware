@@ -12,14 +12,15 @@ fi
 
 which mkcramfs > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo "Dependency mkcramfs not found"
+  echo "Dependency bashaa not found"
   exit 1
 fi
 
 cp -fR firmware/ firmware.new/
-mkcramfs -p firmware.new/ rootfs.img
-gzip  -c rootfs.img > rootfs.img.img.gz
-rm -f rootfs.img
+chown -R root.root firmware.new/
+mkcramfs firmware.new/ rootfs.img 
+gzip -c rootfs.img > rootfs.img.gz
+md5sum rootfs.img.gz > rootfs.img.gz.md5
 rm -fr firmware.new/
 
 echo "DONE"
