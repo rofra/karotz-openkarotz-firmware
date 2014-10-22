@@ -12,7 +12,7 @@ fi
 
 which mkcramfs > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo "Dependency bashaa not found"
+  echo "Dependency bash not found"
   exit 1
 fi
 
