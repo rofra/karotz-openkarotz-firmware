@@ -17,6 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 cp -fR firmware/ firmware.new/
+find firmware.new/ -type f -name .gitignore -delete
 chown -R root.root firmware.new/
 mkcramfs firmware.new/ rootfs.img 
 gzip -c rootfs.img > rootfs.img.gz
