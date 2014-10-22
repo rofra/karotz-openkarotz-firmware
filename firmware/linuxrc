@@ -1,9 +1,5 @@
 #!/bin/sh
 
-echo "Create required directories"
-/bin/mkdir -p /dev /mnt /opt /proc /sys /usr /var
-/bin/chown root.root /dev /mnt /opt /proc /sys /usr /var
-
 echo "Mounting /proc"
 /bin/mount -t proc proc /proc
 
