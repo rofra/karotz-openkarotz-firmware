@@ -42,6 +42,9 @@ echo "Creating /dev/ basic inputs"
 /bin/mknod /dev/s3c2410_serial1 c 204 65
 /bin/mknod /dev/s3c2410_serial2 c 204 66
 
+# log
+/bin/mknod /dev/log c 21 5
+
 echo /karotz/scripts/hotplug.sh > /proc/sys/kernel/hotplug
 /sbin/mdev -s
 
