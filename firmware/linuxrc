@@ -59,6 +59,7 @@ echo /karotz/scripts/hotplug.sh > /proc/sys/kernel/hotplug
 
 FILES_LIST="/etc/fstab \
             /etc/group \
+            /etc/dropbear \
             /etc/hosts \
             /etc/inetd.conf \
             /etc/inittab \
