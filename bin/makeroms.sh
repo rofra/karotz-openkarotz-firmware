@@ -19,6 +19,11 @@ fi
 cp -fR firmware/ firmware.new/
 find firmware.new/ -type f -name .gitignore -delete
 chown -R root.root firmware.new/
+
+# Create /dev/console
+mknod -m 600 firmware.new/dev/console c 5 1
+
+# Compile into one file
 mkcramfs firmware.new/ rootfs.img 
 gzip -c rootfs.img > rootfs.img.gz
 rm -f rootfs.img
