@@ -76,6 +76,12 @@ for i in $(echo $FILES_LIST); do
     /bin/ln -s /karotz$i $i
 done
 
+# Create persistent crontab
+if [ ! -d /usr/karotz/persistent/var/spool/cron/crontabs ]; then
+    mkdir -p /usr/karotz/persistent/var/spool/cron/crontabs
+fi
+ln -s /usr/karotz/persistent/var/spool/ /var/spool
+
 [ -e /etc/conf/rootfs_version ] && /bin/rm /etc/conf/rootfs_version
 
 rm -rf /etc/conf/rootfs_version
@@ -97,7 +103,9 @@ export GST_REGISTRY=/usr/karotz/registry
 export GST_REGISTRY_UPDATE=no
 export AUTO_UPDATE=yes
 
-[ -f /etc/conf/enable_syslogd ] && /sbin/syslogd -s 50 -b 2
+# Enable syslog by default
+/bin/touch /etc/conf/enable_syslogd
+/sbin/syslogd -s 50 -b 2
 
 #/sbin/inetd
 
