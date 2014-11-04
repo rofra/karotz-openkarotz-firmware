@@ -2,7 +2,7 @@
 
 ## What is this all about ?
 
-This repo is an up to date image of openkarotz firmware. Tag V 1.0 is official firmware from Violet.
+This repo is an up to date image of openkarotz firmware. Tag V 1.0 is official firmware from Violet. This is a FORK of official project by Massilia, not the original one.
 
 ## How does it work ?
 
