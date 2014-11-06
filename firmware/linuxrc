@@ -99,6 +99,10 @@ rm -rf /etc/conf/rootfs_version
 
 [ -f /usr/etc/profile ] && . /usr/etc/profile
 
+# Create hooks directory
+mkdir -p /usr/karotz/hooks/
+
+
 export GST_REGISTRY=/usr/karotz/registry
 export GST_REGISTRY_UPDATE=no
 export AUTO_UPDATE=yes

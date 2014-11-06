@@ -10,7 +10,6 @@ if [ -e /usr/karotz/hooks/karotz_init_start ]; then
         exit $?
     fi
 else
-    mkdir -p /usr/karotz/hooks/
     touch /usr/karotz/hooks/karotz_init_start
     chmod a+x /usr/karotz/hooks/karotz_init_start
 fi
@@ -64,7 +63,6 @@ if [ -e /usr/karotz/hooks/karotz_init_end ]; then
         exit $?
     fi
 else
-    mkdir -p /usr/karotz/hooks/
     touch /usr/karotz/hooks/karotz_init_end
     chmod a+x /usr/karotz/hooks/karotz_init_end
 fi
