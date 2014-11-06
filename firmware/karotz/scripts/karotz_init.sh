@@ -2,6 +2,20 @@
 
 . /karotz/scripts/update_functions.sh
 
+if [ -e /usr/karotz/hooks/karotz_init_start ]; then
+    echo "karotz_init_start hook launched"
+    chmod a+x /usr/karotz/hooks/karotz_init_start
+    /usr/karotz/hooks/karotz_init_start
+    if [ "$?" -ne "0" ]; then
+        exit $?
+    fi
+else
+    mkdir -p /usr/karotz/hooks/
+    touch /usr/karotz/hooks/karotz_init_start
+    chmod a+x /usr/karotz/hooks/karotz_init_start
+fi
+
+
 # Detects any crashed installation
 
 if [ -e /usr/.install_yaffs_start ] && [ -e /usr/.install_yaffs_stop ]; then
@@ -40,3 +54,18 @@ else
     restauration_yaffs
     reboot
 fi
+
+
+if [ -e /usr/karotz/hooks/karotz_init_end ]; then
+    echo "karotz_init_end hook launched"
+    chmod a+x /usr/karotz/hooks/karotz_init_end
+    /usr/karotz/hooks/karotz_init_end
+    if [ "$?" -ne "0" ]; then
+        exit $?
+    fi
+else
+    mkdir -p /usr/karotz/hooks/
+    touch /usr/karotz/hooks/karotz_init_end
+    chmod a+x /usr/karotz/hooks/karotz_init_end
+fi
+
