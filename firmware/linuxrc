@@ -137,4 +137,15 @@ if [ -x /mnt/usbkey/autorun -a -f /mnt/usbkey/autorun.sig ] ; then
 	$GPG --verify /mnt/usbkey/autorun.sig 2>/dev/null && /mnt/usbkey/autorun
 fi
 
+# Create a Hook before the launch of init
+if [ -e /usr/karotz/hooks/linuxrc_before_init ]; then
+    echo "linuxrc_before_init hook launched"
+    chmod a+x /usr/karotz/hooks/linuxrc_before_init
+    /usr/karotz/hooks/linuxrc_before_init
+else
+    touch /usr/karotz/hooks/linuxrc_before_init
+    chmod a+x /usr/karotz/hooks/linuxrc_before_init
+fi
+
+
 exec /sbin/init
