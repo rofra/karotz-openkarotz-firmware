@@ -76,11 +76,12 @@ for i in $(echo $FILES_LIST); do
     /bin/ln -s /karotz$i $i
 done
 
-# Create persistent crontab
+# Create persistent crontab and launch cron deamon
 if [ ! -d /usr/karotz/persistent/var/spool/cron/crontabs ]; then
     mkdir -p /usr/karotz/persistent/var/spool/cron/crontabs
 fi
 ln -s /usr/karotz/persistent/var/spool/ /var/spool
+/sbin/crond
 
 [ -e /etc/conf/rootfs_version ] && /bin/rm /etc/conf/rootfs_version
 
